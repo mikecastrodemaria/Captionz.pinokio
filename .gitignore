@@ -1,0 +1,5 @@
+# cloned app + its venv (created by install.js)
+app/
+# Pinokio runtime
+logs/
+cache/
