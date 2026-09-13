@@ -10,7 +10,7 @@ Installs and launches Captionz in one click:
 
 - **Install** — clones `mikecastrodemaria/Captionz` into `app/`, creates a venv and
   installs the requirements (Pillow, NiceGUI, Gradio). No PyTorch: the models run in
-  Ollama.
+  Ollama, or in a bundled llama.cpp server (see below).
 - **Start (web UI)** — runs the NiceGUI interface (`python app.py --ui web`) and opens it.
 - **Start (Gradio UI)** — runs the Gradio interface (`python gradio_app.py`), the same one
   used on Hugging Face Spaces, here with the Ollama backend.
@@ -29,12 +29,13 @@ script. See the app repo for full docs.
 ## Requirements
 
 - [Pinokio](https://pinokio.computer) installed.
-- [Ollama](https://ollama.com) running on the machine (or reachable on the network:
-  change the URL in the UI) with at least one vision model, for example:
-
-```bash
-ollama pull qwen3-vl:8b
-```
+- Either [Ollama](https://ollama.com) running on the machine (or reachable on the network:
+  change the URL in the UI) with at least one vision model, for example `ollama pull qwen3-vl:8b`,
+- or **no Ollama at all**: pick the backend "llama.cpp (sans Ollama)" in the UI. On first
+  captioning Captionz downloads a prebuilt `llama-server` for your machine (CUDA / Vulkan /
+  CPU / Metal, 150–500 MB) and the default model Qwen2.5-VL-3B-Instruct Q4_K_M (~2.9 GB)
+  into `app/llamacpp/`. Other GGUF models can be downloaded from Hugging Face or imported
+  from a local Ollama store from the "Modèles llama.cpp…" dialog.
 
 Captions are written next to each image as `image.txt`.
 
